@@ -32,8 +32,6 @@ public class WrapperService {
 			num++;if(num==10) {
 				num=2;
 			}
-			
-			
 		}
 		System.out.println(sum);
 		sum=sum%11;
