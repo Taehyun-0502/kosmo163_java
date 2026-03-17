@@ -36,6 +36,15 @@ public class StringMain2 {
 		}
 	System.out.println(temas[1].trim().equals("기아"));
 		
+	
+	String s =" a b c ";
+	s.replace(" ","");
+	System.out.println(s);
+	
+	
+	
+	
+	
 		
 	}
 
