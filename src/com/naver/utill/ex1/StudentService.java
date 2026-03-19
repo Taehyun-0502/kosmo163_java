@@ -1,5 +1,12 @@
 package com.naver.utill.ex1;
 
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -9,12 +16,48 @@ public class StudentService {
 	
 	private String data;
 	
+	public void backup(ArrayList<StudentDTO>ar) {
+		// 학생의 정보를 info.txt에 저장하기
+		File file=new File("C:\\Taehyun\\sub1\\sub2\\info.txt");
+		try {
+			FileWriter fr =new FileWriter(file);
+			BufferedWriter br =new BufferedWriter(fr);
+			for(int i=0; i<ar.size();i++) {
+			String str =ar.get(i).getName();
+			int kor = ar.get(i).getKor();
+			int eng = ar.get(i).getEng();
+			int math = ar.get(i).getMath();
+			
+			fr.write("\n"+str+"-"+kor+"-"+eng+"-"+math);	
+			fr.flush();
+			
+			}
+			}
+			
+		 catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public StudentService() {
 		this.data = "iu-50-68-90-winter-87-85-76-suji-87-67-95";
 		
 		
 	}
-	public ArrayList<StudentDTO> init () {
+	public ArrayList<StudentDTO> initold () {
 		
 		StringTokenizer st =new StringTokenizer(this.data,"-");
 		ArrayList <StudentDTO>list = new ArrayList<>();
@@ -93,7 +136,40 @@ public class StudentService {
 			
 		
 	}
-	
+	public ArrayList<StudentDTO> init() {
+		File file =new File("C:\\Taehyun\\sub1\\sub2\\info.txt");
+		ArrayList<StudentDTO> list =new ArrayList<>(); 
+		try {
+			FileReader fr=new FileReader(file);
+			BufferedReader br=new BufferedReader(fr);
+			
+			while(true) {
+			String info =br.readLine();
+			if(info==null) {
+				break;
+			}
+			String [] ar=info.split("-");
+			
+				StudentDTO dto =new StudentDTO();
+				dto.setName(ar[0]);
+				dto.setKor(Integer.parseInt(ar[1]));
+				dto.setEng(Integer.parseInt(ar[2]));
+				dto.setMath(Integer.parseInt(ar[3]));
+				list.add(dto);
+				
+			}			
+			
+		}
+			
+		 catch (Exception e) {
+		
+			e.printStackTrace();
+				
+		}
+		
+		return list;
+		
+	}
 	
 	
 }
